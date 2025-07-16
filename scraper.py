@@ -13,6 +13,3 @@ def scrape_ftmo():
 
 if __name__ == "__main__":
     scrape_ftmo()
-
-
-add scraper.py
