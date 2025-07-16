@@ -1,15 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
 
-def scrape_ftmo():
-    url = "https://ftmo.com/it/faq/"
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    
-    text = soup.get_text(separator='\n')
-    
-    with open("ftmo.txt", "w") as f:
-        f.write(text)
+url = "https://ftmo.com/it/faq/"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "html.parser")
 
-if __name__ == "__main__":
-    scrape_ftmo()
+faq_elements = soup.find_all(["h2", "h3", "p", "li"])
+
+with open("ftmo_faq.txt", "w") as file:
+    for element in faq_elements:
+        file.write(element.get_text(strip=True) + "\n")
+
+print("✅ Estrazione completata: contenuto salvato in ftmo_faq.txt")
